@@ -14,6 +14,14 @@
 		156C8F582582B0C1001E4B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156C8F572582B0C1001E4B9A /* Assets.xcassets */; };
 		156C8F5B2582B0C1001E4B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 156C8F592582B0C1001E4B9A /* LaunchScreen.storyboard */; };
 		15F9F8202582C84300E509C5 /* restaurant.svg in Resources */ = {isa = PBXBuildFile; fileRef = 15F9F81F2582C84300E509C5 /* restaurant.svg */; };
+		15F9F83D258393BA00E509C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F83C258393BA00E509C5 /* User.swift */; };
+		15F9F841258393C600E509C5 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F840258393C600E509C5 /* Table.swift */; };
+		15F9F844258393DF00E509C5 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F843258393DF00E509C5 /* Reservation.swift */; };
+		15F9F85525839F2800E509C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15F9F85425839F2800E509C5 /* GoogleService-Info.plist */; };
+		15F9F85825839F7500E509C5 /* FIRFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F85725839F7500E509C5 /* FIRFirestoreService.swift */; };
+		15F9F89A2583C79900E509C5 /* FIRCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F8992583C79900E509C5 /* FIRCollectionReference.swift */; };
+		15F9F8B42583CB8200E509C5 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F8B32583CB8200E509C5 /* EncodableExtensions.swift */; };
+		15F9F8CE2583D1A100E509C5 /* SnapshotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F8CD2583D1A100E509C5 /* SnapshotExtensions.swift */; };
 		249E3F48C27E3D0185664D57 /* Pods_VisualBooking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABD486185E26EB69D1EBEB9 /* Pods_VisualBooking.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,14 @@
 		156C8F5A2582B0C1001E4B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		156C8F5C2582B0C1001E4B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15F9F81F2582C84300E509C5 /* restaurant.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant.svg; sourceTree = "<group>"; };
+		15F9F83C258393BA00E509C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		15F9F840258393C600E509C5 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		15F9F843258393DF00E509C5 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		15F9F85425839F2800E509C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		15F9F85725839F7500E509C5 /* FIRFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRFirestoreService.swift; sourceTree = "<group>"; };
+		15F9F8992583C79900E509C5 /* FIRCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCollectionReference.swift; sourceTree = "<group>"; };
+		15F9F8B32583CB8200E509C5 /* EncodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodableExtensions.swift; sourceTree = "<group>"; };
+		15F9F8CD2583D1A100E509C5 /* SnapshotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotExtensions.swift; sourceTree = "<group>"; };
 		CEDCB0B49CBE6B000A67BD49 /* Pods-VisualBooking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.debug.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.debug.xcconfig"; sourceTree = "<group>"; };
 		E3C546878ADC7E42A4429D2E /* Pods-VisualBooking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.release.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.release.xcconfig"; sourceTree = "<group>"; };
 		FABD486185E26EB69D1EBEB9 /* Pods_VisualBooking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisualBooking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +81,11 @@
 		156C8F4D2582B0C1001E4B9A /* VisualBooking */ = {
 			isa = PBXGroup;
 			children = (
-				15F9F8222582C8E200E509C5 /* resourses */,
+				15F9F8CC2583D18A00E509C5 /* Extentions */,
+				15F9F89C2583C7C100E509C5 /* FIR */,
+				15F9F83B258393A400E509C5 /* Models */,
+				15F9F85425839F2800E509C5 /* GoogleService-Info.plist */,
+				15F9F8222582C8E200E509C5 /* Resourses */,
 				156C8F4E2582B0C1001E4B9A /* AppDelegate.swift */,
 				156C8F502582B0C1001E4B9A /* SceneDelegate.swift */,
 				156C8F522582B0C1001E4B9A /* ViewController.swift */,
@@ -77,12 +97,40 @@
 			path = VisualBooking;
 			sourceTree = "<group>";
 		};
-		15F9F8222582C8E200E509C5 /* resourses */ = {
+		15F9F8222582C8E200E509C5 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
 				15F9F81F2582C84300E509C5 /* restaurant.svg */,
 			);
-			path = resourses;
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		15F9F83B258393A400E509C5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15F9F83C258393BA00E509C5 /* User.swift */,
+				15F9F840258393C600E509C5 /* Table.swift */,
+				15F9F843258393DF00E509C5 /* Reservation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		15F9F89C2583C7C100E509C5 /* FIR */ = {
+			isa = PBXGroup;
+			children = (
+				15F9F85725839F7500E509C5 /* FIRFirestoreService.swift */,
+				15F9F8992583C79900E509C5 /* FIRCollectionReference.swift */,
+			);
+			path = FIR;
+			sourceTree = "<group>";
+		};
+		15F9F8CC2583D18A00E509C5 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				15F9F8B32583CB8200E509C5 /* EncodableExtensions.swift */,
+				15F9F8CD2583D1A100E509C5 /* SnapshotExtensions.swift */,
+			);
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 		377CD7B3725007803951C2B7 /* Frameworks */ = {
@@ -163,6 +211,7 @@
 			files = (
 				156C8F5B2582B0C1001E4B9A /* LaunchScreen.storyboard in Resources */,
 				15F9F8202582C84300E509C5 /* restaurant.svg in Resources */,
+				15F9F85525839F2800E509C5 /* GoogleService-Info.plist in Resources */,
 				156C8F582582B0C1001E4B9A /* Assets.xcassets in Resources */,
 				156C8F562582B0C1001E4B9A /* Main.storyboard in Resources */,
 			);
@@ -217,7 +266,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F9F83D258393BA00E509C5 /* User.swift in Sources */,
+				15F9F8B42583CB8200E509C5 /* EncodableExtensions.swift in Sources */,
+				15F9F841258393C600E509C5 /* Table.swift in Sources */,
+				15F9F844258393DF00E509C5 /* Reservation.swift in Sources */,
+				15F9F89A2583C79900E509C5 /* FIRCollectionReference.swift in Sources */,
 				156C8F532582B0C1001E4B9A /* ViewController.swift in Sources */,
+				15F9F85825839F7500E509C5 /* FIRFirestoreService.swift in Sources */,
+				15F9F8CE2583D1A100E509C5 /* SnapshotExtensions.swift in Sources */,
 				156C8F4F2582B0C1001E4B9A /* AppDelegate.swift in Sources */,
 				156C8F512582B0C1001E4B9A /* SceneDelegate.swift in Sources */,
 			);

@@ -7,8 +7,10 @@
 
 import UIKit
 import Macaw
-
+import FirebaseFirestore
 class ViewController: UIViewController {
+
+    
     var restView: MacawView = {
         let node = try! SVGParser.parse(path: "restaurant")
         let view = MacawView(node: node, frame: CGRect.zero)
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
         "5"
     ]
     var tableColour = Color(0x56595f)
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
@@ -39,6 +42,11 @@ class ViewController: UIViewController {
         tableId.forEach { id in
             registerForSelection(nodeTag: id)
         }
+//        FIRFirestoreService.shared.read()
+//        FIRFirestoreService.shared.update()
+        let adri = User(name: "Adrian", phone: "0991111111")
+        FIRFirestoreService.shared.create(for: adri, in: .users)
+        
     }
 
     private func registerForSelection(nodeTag: String) {
