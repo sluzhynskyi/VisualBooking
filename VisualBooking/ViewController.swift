@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     
     var restView: MacawView = {
-        let node = try! SVGParser.parse(path: "restaurant")
+        let node = try! SVGParser.parse(path: "restaurant_with_sofa")
         let view = MacawView(node: node, frame: CGRect.zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -30,22 +30,16 @@ class ViewController: UIViewController {
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
-
         view.addSubview(restView)
-        restView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        restView.centerYAnchor .constraint(equalTo: view.centerYAnchor).isActive = true
-        restView.widthAnchor.constraint(equalToConstant: 400).isActive = true
-        restView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        setupRestaurantViewLayout()
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableId.forEach { id in
             registerForSelection(nodeTag: id)
         }
-//        FIRFirestoreService.shared.read()
-//        FIRFirestoreService.shared.update()
-        let adri = User(name: "Adrian", phone: "0991111111")
-        FIRFirestoreService.shared.create(for: adri, in: .users)
         
     }
 
@@ -53,9 +47,17 @@ class ViewController: UIViewController {
         self.restView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
             let nodeShape = self.restView.node.nodeBy(tag: nodeTag) as! Shape
             nodeShape.fill = (nodeShape.fill == self.tableColour) ? Color.red : self.tableColour
+            print(nodeTag)
         })
     }
 
+    private func setupRestaurantViewLayout(){
+        restView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        restView.centerYAnchor .constraint(equalTo: view.centerYAnchor).isActive = true
+        restView.widthAnchor.constraint(equalToConstant: 400).isActive = true
+        restView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+    }
+    
 }
 
 
