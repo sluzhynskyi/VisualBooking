@@ -9,7 +9,12 @@ import UIKit
 import Macaw
 
 class ViewController: UIViewController {
-    @IBOutlet weak var svgView: SVGView!
+    var restView: MacawView = {
+        let node = try! SVGParser.parse(path: "restaurant")
+        let view = MacawView(node: node, frame: CGRect.zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     var tableId = [
         "0",
         "1",
@@ -19,6 +24,16 @@ class ViewController: UIViewController {
         "5"
     ]
     var tableColour = Color(0x56595f)
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = .white
+
+        view.addSubview(restView)
+        restView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        restView.centerYAnchor .constraint(equalTo: view.centerYAnchor).isActive = true
+        restView.widthAnchor.constraint(equalToConstant: 400).isActive = true
+        restView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableId.forEach { id in
@@ -27,8 +42,8 @@ class ViewController: UIViewController {
     }
 
     private func registerForSelection(nodeTag: String) {
-        self.svgView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
-            let nodeShape = self.svgView.node.nodeBy(tag: nodeTag) as! Shape
+        self.restView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
+            let nodeShape = self.restView.node.nodeBy(tag: nodeTag) as! Shape
             nodeShape.fill = (nodeShape.fill == self.tableColour) ? Color.red : self.tableColour
         })
     }
