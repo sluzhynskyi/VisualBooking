@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - AvailableHapticFeedback (1.0.2)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -317,22 +318,28 @@ PODS:
   - leveldb-library (1.22)
   - Macaw (0.9.7):
     - SWXMLHash
+  - MultiSlider (1.10.13):
+    - AvailableHapticFeedback
+    - SweeterSwift
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.11)
+  - SweeterSwift (1.1.4)
   - SWXMLHash (5.0.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Firestore
   - Macaw (from `https://github.com/exyte/Macaw.git`)
+  - MultiSlider
 
 SPEC REPOS:
   trunk:
     - abseil
+    - AvailableHapticFeedback
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -346,8 +353,10 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - leveldb-library
+    - MultiSlider
     - nanopb
     - PromisesObjC
+    - SweeterSwift
     - SWXMLHash
 
 EXTERNAL SOURCES:
@@ -361,6 +370,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Firebase: 26223c695fe322633274198cb19dca8cb7e54416
   FirebaseAnalytics: 2580c2d62535ae7b644143d48941fcc239ea897a
@@ -375,10 +385,12 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   Macaw: 4a931baf9a9826b06d0d8ecf300014c962ab9d50
+  MultiSlider: 6e711a3338090fcd9847a120771b957597414449
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
 
-PODFILE CHECKSUM: 2c980ca0ffc8bc15b95b7b817ba6107dc4fb0337
+PODFILE CHECKSUM: a91aa0c9445ee59d703ab1d16bc68e9b046cad70
 
 COCOAPODS: 1.10.0

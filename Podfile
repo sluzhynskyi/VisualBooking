@@ -9,5 +9,6 @@ target 'VisualBooking' do
   pod 'Macaw', :git => 'https://github.com/exyte/Macaw.git'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
+  pod 'MultiSlider'
 
 end
