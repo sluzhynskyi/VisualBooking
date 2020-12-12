@@ -14,7 +14,13 @@
 		156D8A162584E06800CD3616 /* restaurant_croped.svg in Resources */ = {isa = PBXBuildFile; fileRef = 156D8A152584E06800CD3616 /* restaurant_croped.svg */; };
 		156D8A312584FA3100CD3616 /* UIColorExtentsions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A302584FA3100CD3616 /* UIColorExtentsions.swift */; };
 		156D8A372585470D00CD3616 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A362585470D00CD3616 /* Constants.swift */; };
-		156D8A3C25854EC500CD3616 /* TimeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A3B25854EC500CD3616 /* TimeSlider.swift */; };
+		156D8A702585791B00CD3616 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 156D8A682585791B00CD3616 /* README.md */; };
+		156D8A712585791B00CD3616 /* MultiSlider+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A6A2585791B00CD3616 /* MultiSlider+Internal.swift */; };
+		156D8A722585791B00CD3616 /* MultiSlider+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A6B2585791B00CD3616 /* MultiSlider+Drag.swift */; };
+		156D8A732585791B00CD3616 /* MultiSliderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A6C2585791B00CD3616 /* MultiSliderExtensions.swift */; };
+		156D8A742585791B00CD3616 /* MultiSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A6D2585791B00CD3616 /* MultiSlider.swift */; };
+		156D8A752585791B00CD3616 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 156D8A6E2585791B00CD3616 /* LICENSE.txt */; };
+		156D8A762585791B00CD3616 /* TimeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A6F2585791B00CD3616 /* TimeSlider.swift */; };
 		15F9F8202582C84300E509C5 /* restaurant.svg in Resources */ = {isa = PBXBuildFile; fileRef = 15F9F81F2582C84300E509C5 /* restaurant.svg */; };
 		15F9F83D258393BA00E509C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F83C258393BA00E509C5 /* User.swift */; };
 		15F9F841258393C600E509C5 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F840258393C600E509C5 /* Table.swift */; };
@@ -39,7 +45,13 @@
 		156D8A152584E06800CD3616 /* restaurant_croped.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant_croped.svg; sourceTree = "<group>"; };
 		156D8A302584FA3100CD3616 /* UIColorExtentsions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtentsions.swift; sourceTree = "<group>"; };
 		156D8A362585470D00CD3616 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		156D8A3B25854EC500CD3616 /* TimeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlider.swift; sourceTree = "<group>"; };
+		156D8A682585791B00CD3616 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		156D8A6A2585791B00CD3616 /* MultiSlider+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiSlider+Internal.swift"; sourceTree = "<group>"; };
+		156D8A6B2585791B00CD3616 /* MultiSlider+Drag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MultiSlider+Drag.swift"; sourceTree = "<group>"; };
+		156D8A6C2585791B00CD3616 /* MultiSliderExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSliderExtensions.swift; sourceTree = "<group>"; };
+		156D8A6D2585791B00CD3616 /* MultiSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSlider.swift; sourceTree = "<group>"; };
+		156D8A6E2585791B00CD3616 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		156D8A6F2585791B00CD3616 /* TimeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlider.swift; sourceTree = "<group>"; };
 		15F9F81F2582C84300E509C5 /* restaurant.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant.svg; sourceTree = "<group>"; };
 		15F9F83C258393BA00E509C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		15F9F840258393C600E509C5 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
@@ -89,7 +101,7 @@
 		156C8F4D2582B0C1001E4B9A /* VisualBooking */ = {
 			isa = PBXGroup;
 			children = (
-				156D8A3A25854E8C00CD3616 /* TimeSlider */,
+				156D8A662585791B00CD3616 /* ExternalLibraries */,
 				156D8A35258546F200CD3616 /* Constants */,
 				156D8A34258546DC00CD3616 /* ViewControllers */,
 				156D8A33258546BA00CD3616 /* Delegates */,
@@ -130,12 +142,34 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		156D8A3A25854E8C00CD3616 /* TimeSlider */ = {
+		156D8A662585791B00CD3616 /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
-				156D8A3B25854EC500CD3616 /* TimeSlider.swift */,
+				156D8A672585791B00CD3616 /* MultiSlider */,
+				156D8A6F2585791B00CD3616 /* TimeSlider.swift */,
 			);
-			path = TimeSlider;
+			path = ExternalLibraries;
+			sourceTree = "<group>";
+		};
+		156D8A672585791B00CD3616 /* MultiSlider */ = {
+			isa = PBXGroup;
+			children = (
+				156D8A682585791B00CD3616 /* README.md */,
+				156D8A692585791B00CD3616 /* Sources */,
+				156D8A6E2585791B00CD3616 /* LICENSE.txt */,
+			);
+			path = MultiSlider;
+			sourceTree = "<group>";
+		};
+		156D8A692585791B00CD3616 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				156D8A6A2585791B00CD3616 /* MultiSlider+Internal.swift */,
+				156D8A6B2585791B00CD3616 /* MultiSlider+Drag.swift */,
+				156D8A6C2585791B00CD3616 /* MultiSliderExtensions.swift */,
+				156D8A6D2585791B00CD3616 /* MultiSlider.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		15F9F8222582C8E200E509C5 /* Resourses */ = {
@@ -256,6 +290,8 @@
 				156D8A162584E06800CD3616 /* restaurant_croped.svg in Resources */,
 				15F9F8202582C84300E509C5 /* restaurant.svg in Resources */,
 				15F9F85525839F2800E509C5 /* GoogleService-Info.plist in Resources */,
+				156D8A702585791B00CD3616 /* README.md in Resources */,
+				156D8A752585791B00CD3616 /* LICENSE.txt in Resources */,
 				156C8F582582B0C1001E4B9A /* Assets.xcassets in Resources */,
 				15F9F9592584257900E509C5 /* LaunchScreen.storyboard in Resources */,
 				15F9F9112583FE7E00E509C5 /* restaurant_with_sofa.svg in Resources */,
@@ -315,12 +351,16 @@
 				15F9F8B42583CB8200E509C5 /* EncodableExtensions.swift in Sources */,
 				15F9F841258393C600E509C5 /* Table.swift in Sources */,
 				15F9F844258393DF00E509C5 /* Reservation.swift in Sources */,
+				156D8A762585791B00CD3616 /* TimeSlider.swift in Sources */,
+				156D8A732585791B00CD3616 /* MultiSliderExtensions.swift in Sources */,
 				15F9F89A2583C79900E509C5 /* FIRCollectionReference.swift in Sources */,
 				156C8F532582B0C1001E4B9A /* ViewController.swift in Sources */,
 				15F9F85825839F7500E509C5 /* FIRFirestoreService.swift in Sources */,
-				156D8A3C25854EC500CD3616 /* TimeSlider.swift in Sources */,
 				156D8A312584FA3100CD3616 /* UIColorExtentsions.swift in Sources */,
+				156D8A722585791B00CD3616 /* MultiSlider+Drag.swift in Sources */,
+				156D8A742585791B00CD3616 /* MultiSlider.swift in Sources */,
 				15F9F8CE2583D1A100E509C5 /* SnapshotExtensions.swift in Sources */,
+				156D8A712585791B00CD3616 /* MultiSlider+Internal.swift in Sources */,
 				156C8F4F2582B0C1001E4B9A /* AppDelegate.swift in Sources */,
 				156C8F512582B0C1001E4B9A /* SceneDelegate.swift in Sources */,
 				156D8A372585470D00CD3616 /* Constants.swift in Sources */,
