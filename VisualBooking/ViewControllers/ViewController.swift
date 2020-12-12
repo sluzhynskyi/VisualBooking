@@ -10,20 +10,11 @@ import Macaw
 import FirebaseFirestore
 import MultiSlider
 class ViewController: UIViewController {
-    var tableColor = Color(0x56595f)
-    var slideColor = UIColor(hex: "#c6b8a7ff")
-    var tableId = [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-    ]
 
+    var reservations: [Reservation] = []
 
     let restView: MacawView = {
-        let node = try! SVGParser.parse(path: "restaurant_croped")
+        let node = try! SVGParser.parse(path: Constants.svgFileName)
         let view = MacawView(node: node, frame: CGRect.zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -40,16 +31,17 @@ class ViewController: UIViewController {
         return picker
     }()
 
-    let timeSlider: MultiSlider = {
-        let slider = MultiSlider()
-        slider.minimumValue = 0 // default is 0.0
-        slider.maximumValue = 720 // default is 1.0
-        slider.snapStepSize = 15
-        slider.distanceBetweenThumbs = 90
+    let timeSlider: TimeSlider = {
+        let slider = TimeSlider()
+        slider.minimumValue = Constants.openTime
+        slider.maximumValue = Constants.closeTime
+        slider.snapStepSize = Constants.snapTime
+        slider.distanceBetweenThumbs = Constants.minimalTimeReservation
+        slider.value = Constants.thumbsInitialPosition
+        slider.orientation = .horizontal
         slider.valueLabelPosition = .top
-        slider.orientation = .horizontal // default is .vertical
-        slider.tintColor = UIColor(hex: "#c6b8a7ff")
-        slider.value = [1, 720]
+        slider.tintColor = Constants.inSlideColor
+        slider.outerTrackColor = Constants.outSlideColor
         slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged) // continuous changes
         slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -69,41 +61,53 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableId.forEach { id in
+        Constants.tableId.forEach { id in
             registerForSelection(nodeTag: id)
         }
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+//        let st = formatter.date(from: "2020/12/12 18:30")!
+//        let end = formatter.date(from: "2020/12/12 19:30")!
+//        let DanyloId = "vP2s62SjcTq3FOVaKhDE"
+//
+//        let r1 = Reservation(userId: DanyloId, tableId: "1", startReservation: st, endReservation: end)
+//        FIRFirestoreService.shared.create(for: r1, in: .reservations)
+//        print("LOADED")
 
     }
 
     private func registerForSelection(nodeTag: String) {
         self.restView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
             let nodeShape = self.restView.node.nodeBy(tag: nodeTag) as! Shape
-            nodeShape.fill = (nodeShape.fill == self.tableColor) ? Color.red : self.tableColor
+            nodeShape.fill = (nodeShape.fill == Constants.tableColor) ? Color.whiteSmoke : Constants.tableColor
             print(nodeTag)
         })
     }
+
     @objc func datePickerValueChanged(_ sender: UIDatePicker) {
-
-        // Create date formatter
-        let dateFormatter: DateFormatter = DateFormatter()
-
-        // Set date format
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-
-        // Apply date format
-        let selectedDate: String = dateFormatter.string(from: sender.date)
-
-        print("Selected value \(selectedDate)")
+//        let dateFormatter: DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MM/dd/yyyy"
+//        let selectedDate: String = dateFormatter.string(from: sender.date)
+//        print("Selected value \(selectedDate)")
     }
+
+    // MARK:- Slider functions
     @objc func sliderChanged(_ slider: MultiSlider) {
-        print("thumb \(slider.draggedThumbIndex) moved")
-        print("now thumbs are at \(slider.value)") // e.g., [1.0, 4.5, 5.0]
+        let dateOfDay = Calendar.current.startOfDay(for: datePicker.date)
+        let values = slider.value.map { (dateOfDay + TimeInterval(Int($0) * 60)).timeIntervalSince1970 }
+        let start = values[0], end = values[1]
+
+        FIRFirestoreService.shared.read(from: .reservations, returning: Reservation.self, orderBy: "startReservation", startAt: [start], endAt: [end]) { (reservations) in
+            self.reservations = reservations
+        }
+        print(self.reservations)
     }
+
     @objc func sliderDragEnded(_ sender: MultiSlider) {
-        print(sender.value)
+//        print(sender.value)
     }
 
-
+    // MARK: - Layout
     private func setupRestaurantViewLayout() {
         restView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         restView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -115,6 +119,7 @@ class ViewController: UIViewController {
         datePicker.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datePicker.bottomAnchor.constraint(equalTo: timeSlider.topAnchor).isActive = true
+//        datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
     }
 
     private func setupTimeSliderLayout() {

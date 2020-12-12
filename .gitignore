@@ -91,19 +91,19 @@ fastlane/report.xml
 fastlane/screenshots
 
 # OSX Temp
-.DS_Store
-.AppleDouble
-.LSOverride
+*.DS_Store
+*.AppleDouble
+*.LSOverride
 
 # OSX Thumbnails
-._*
+*._*
 
 # OSX Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
+*.AppleDB
+*.AppleDesktop
 Network Trash Folder
 Temporary Items
-.apdisk
+*.apdisk
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
