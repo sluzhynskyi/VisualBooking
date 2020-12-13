@@ -6,9 +6,9 @@ target 'VisualBooking' do
   use_frameworks!
 
   # Pods for VisualBooking
-  pod 'Macaw', :git => 'https://github.com/exyte/Macaw.git'
+  pod 'Macaw'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
-  pod 'MultiSlider'
+  pod 'MultiSlider', :git => 'https://github.com/sluzhynskyi/MultiSlider.git', :branch => 'DateSlider'
 
 end

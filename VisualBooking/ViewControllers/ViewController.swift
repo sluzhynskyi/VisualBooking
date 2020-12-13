@@ -8,7 +8,7 @@
 import UIKit
 import Macaw
 import FirebaseFirestore
-
+import MultiSlider
 class ViewController: UIViewController {
 
     var reservations: [Reservation] = []
@@ -31,8 +31,8 @@ class ViewController: UIViewController {
         return picker
     }()
 
-    let timeSlider: TimeSlider = {
-        let slider = TimeSlider()
+    let timeSlider: MultiSlider = {
+        let slider = MultiSlider()
         slider.minimumValue = Constants.openTime
         slider.maximumValue = Constants.closeTime
         slider.snapStepSize = Constants.snapTime
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
     }
 
     // MARK:- Slider functions
-    @objc func sliderChanged(_ slider: TimeSlider) {
+    @objc func sliderChanged(_ slider: MultiSlider) {
         let dateOfDay = Calendar.current.startOfDay(for: datePicker.date)
         let values = slider.value.map { (dateOfDay + TimeInterval(Int($0) * 60)).timeIntervalSince1970 }
         let start = values[0], end = values[1]
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         print(self.reservations)
     }
 
-    @objc func sliderDragEnded(_ sender: TimeSlider) {
+    @objc func sliderDragEnded(_ sender: MultiSlider) {
 //        print(sender.value)
     }
 

@@ -333,8 +333,8 @@ PODS:
 DEPENDENCIES:
   - Firebase/Analytics
   - Firebase/Firestore
-  - Macaw (from `https://github.com/exyte/Macaw.git`)
-  - MultiSlider
+  - Macaw
+  - MultiSlider (from `https://github.com/sluzhynskyi/MultiSlider.git`, branch `DateSlider`)
 
 SPEC REPOS:
   trunk:
@@ -353,20 +353,21 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - leveldb-library
-    - MultiSlider
+    - Macaw
     - nanopb
     - PromisesObjC
     - SweeterSwift
     - SWXMLHash
 
 EXTERNAL SOURCES:
-  Macaw:
-    :git: https://github.com/exyte/Macaw.git
+  MultiSlider:
+    :branch: DateSlider
+    :git: https://github.com/sluzhynskyi/MultiSlider.git
 
 CHECKOUT OPTIONS:
-  Macaw:
-    :commit: 2b406e55f21d2122a6cea081bc57db413c010427
-    :git: https://github.com/exyte/Macaw.git
+  MultiSlider:
+    :commit: 66544ffa22b97d20d6921b6dc9c5c8f8b604cc9b
+    :git: https://github.com/sluzhynskyi/MultiSlider.git
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -391,6 +392,6 @@ SPEC CHECKSUMS:
   SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
 
-PODFILE CHECKSUM: a91aa0c9445ee59d703ab1d16bc68e9b046cad70
+PODFILE CHECKSUM: 6bc2daf730ae42f793180a3e7f50cf037db2d92b
 
 COCOAPODS: 1.10.0
