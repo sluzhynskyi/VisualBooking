@@ -13,25 +13,26 @@ class ViewController: UIViewController {
 
     var reservations: [Reservation] = []
 
-    let restView: MacawView = {
+    @UsesAutoLayout
+    var restaurantView: MacawView = {
         let node = try! SVGParser.parse(path: Constants.svgFileName)
         let view = MacawView(node: node, frame: CGRect.zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    let datePicker: UIDatePicker = {
+    @UsesAutoLayout
+    var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.timeZone = NSTimeZone.local
         picker.backgroundColor = UIColor.white
-        picker.translatesAutoresizingMaskIntoConstraints = false
         picker.preferredDatePickerStyle = .compact
         picker.datePickerMode = .date
         picker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         return picker
     }()
 
-    let timeSlider: MultiSlider = {
+    @UsesAutoLayout
+    var timeSlider: MultiSlider = {
         let slider = MultiSlider()
         slider.minimumValue = Constants.openTime
         slider.maximumValue = Constants.closeTime
@@ -44,15 +45,13 @@ class ViewController: UIViewController {
         slider.outerTrackColor = Constants.outSlideColor
         slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged) // continuous changes
         slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
-        slider.translatesAutoresizingMaskIntoConstraints = false
-
         return slider
     }()
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
 
-        [restView, datePicker, timeSlider].forEach { view.addSubview($0) }
+        [restaurantView, datePicker, timeSlider].forEach { view.addSubview($0) }
         setupRestaurantViewLayout()
         setupDatePickerLayout()
         setupTimeSliderLayout()
@@ -77,8 +76,8 @@ class ViewController: UIViewController {
     }
 
     private func registerForSelection(nodeTag: String) {
-        self.restView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
-            let nodeShape = self.restView.node.nodeBy(tag: nodeTag) as! Shape
+        self.restaurantView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
+            let nodeShape = self.restaurantView.node.nodeBy(tag: nodeTag) as! Shape
             nodeShape.fill = (nodeShape.fill == Constants.tableColor) ? Color.whiteSmoke : Constants.tableColor
             print(nodeTag)
         })
@@ -107,26 +106,35 @@ class ViewController: UIViewController {
 //        print(sender.value)
     }
 
-    // MARK: - Layout
+    // MARK: Layout
+    
+    // Restourant view constraints
     private func setupRestaurantViewLayout() {
-        restView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        restView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        restView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-        restView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        let constraints = [
+            restaurantView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            restaurantView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            restaurantView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            restaurantView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 
     private func setupDatePickerLayout() {
-        datePicker.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        datePicker.bottomAnchor.constraint(equalTo: timeSlider.topAnchor).isActive = true
-//        datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1).isActive = true
+        let constraints = [
+            datePicker.topAnchor.constraint(equalTo: view.topAnchor),
+            datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            datePicker.bottomAnchor.constraint(equalTo: timeSlider.topAnchor),
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 
     private func setupTimeSliderLayout() {
-        timeSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        timeSlider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        timeSlider.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: -32).isActive = true
-        timeSlider.bottomAnchor.constraint(equalTo: restView.topAnchor).isActive = true
+        let constraints = [
+            timeSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeSlider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            timeSlider.bottomAnchor.constraint(equalTo: restaurantView.topAnchor),
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 
 }
