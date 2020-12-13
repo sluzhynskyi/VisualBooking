@@ -25,12 +25,19 @@ class ViewController: UIViewController {
         let picker = UIDatePicker()
         picker.timeZone = NSTimeZone.local
         picker.backgroundColor = UIColor.white
-        picker.preferredDatePickerStyle = .compact
+        picker.preferredDatePickerStyle = .inline
         picker.datePickerMode = .date
         picker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         return picker
     }()
-
+    @UsesAutoLayout
+    var inputDateTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Pick a Day"
+        textField.textAlignment = .center
+        textField.layer.zPosition = 2
+        return textField
+    }()
     @UsesAutoLayout
     var timeSlider: MultiSlider = {
         let slider = MultiSlider()
@@ -43,6 +50,7 @@ class ViewController: UIViewController {
         slider.valueLabelPosition = .top
         slider.tintColor = Constants.inSlideColor
         slider.outerTrackColor = Constants.outSlideColor
+        slider.layer.zPosition = 1
         slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged) // continuous changes
         slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
         return slider
@@ -51,7 +59,7 @@ class ViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
 
-        [restaurantView, datePicker, timeSlider].forEach { view.addSubview($0) }
+        [restaurantView, inputDateTextField, timeSlider].forEach { view.addSubview($0) }
         setupRestaurantViewLayout()
         setupDatePickerLayout()
         setupTimeSliderLayout()
@@ -63,6 +71,11 @@ class ViewController: UIViewController {
         Constants.tableId.forEach { id in
             registerForSelection(nodeTag: id)
         }
+        datePicker.frame = CGRect(x: view.frame.minX, y: view.frame.maxY - 250, width: view.frame.width, height: 250)
+        inputDateTextField.inputView = datePicker
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOutsideDate(_:)))
+        view.addGestureRecognizer(tapGesture)
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy/MM/dd HH:mm"
 //        let st = formatter.date(from: "2020/12/12 18:30")!
@@ -82,12 +95,15 @@ class ViewController: UIViewController {
             print(nodeTag)
         })
     }
+    @objc func tappedOutsideDate(_ sender: UIView) {
+        inputDateTextField.endEditing(true)
+    }
 
     @objc func datePickerValueChanged(_ sender: UIDatePicker) {
-//        let dateFormatter: DateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "MM/dd/yyyy"
-//        let selectedDate: String = dateFormatter.string(from: sender.date)
-//        print("Selected value \(selectedDate)")
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E, dd MMM yyyy"
+        inputDateTextField.text = dateFormatter.string(from: datePicker.date)
+        inputDateTextField.endEditing(true)
     }
 
     // MARK:- Slider functions
@@ -107,32 +123,34 @@ class ViewController: UIViewController {
     }
 
     // MARK: Layout
-    
+
     // Restourant view constraints
     private func setupRestaurantViewLayout() {
         let constraints = [
+            restaurantView.topAnchor.constraint(equalTo: timeSlider.bottomAnchor, constant: 20),
             restaurantView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            restaurantView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             restaurantView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             restaurantView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+//            restaurantView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
     private func setupDatePickerLayout() {
         let constraints = [
-            datePicker.topAnchor.constraint(equalTo: view.topAnchor),
-            datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            datePicker.bottomAnchor.constraint(equalTo: timeSlider.topAnchor),
+            inputDateTextField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 10),
+            inputDateTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            inputDateTextField.heightAnchor.constraint(equalToConstant: 50),
+            inputDateTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
     private func setupTimeSliderLayout() {
         let constraints = [
+            timeSlider.topAnchor.constraint(equalTo: inputDateTextField.bottomAnchor, constant: 10),
             timeSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeSlider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            timeSlider.bottomAnchor.constraint(equalTo: restaurantView.topAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
     }
