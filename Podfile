@@ -7,7 +7,7 @@ target 'VisualBooking' do
   # Ignore all warning from all pods
   inhibit_all_warnings!
   # Pods for VisualBooking
-  pod 'Macaw'
+  pod 'Macaw', :git => 'https://github.com/sluzhynskyi/Macaw.git', :branch => 'NodeImprove'
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'MultiSlider', :git => 'https://github.com/sluzhynskyi/MultiSlider.git', :branch => 'DateSlider'

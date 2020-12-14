@@ -6,14 +6,15 @@
 //
 
 import Foundation
-
-struct Table: Codable, FirebaseObject {
-    var id: String? = nil
-    var peopleByTable: Int = 2
-    var tableType: String? = nil
-    init(peopleByTable: Int, tableType: TableType) {
-        self.peopleByTable = peopleByTable
-        self.tableType = tableType.rawValue
+import Macaw
+struct Table {
+    var id: String!
+    var peopleByTable: Int = Constants.defaultPeopleByTable
+    var tableType: String? = TableType.regular.rawValue
+    var node: Node
+    init(id: String, node: Node) {
+        self.id = id
+        self.node = node
     }
 }
 

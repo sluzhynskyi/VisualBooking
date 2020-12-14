@@ -51,8 +51,8 @@
 		15F9F8CD2583D1A100E509C5 /* SnapshotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotExtensions.swift; sourceTree = "<group>"; };
 		15F9F9102583FE7E00E509C5 /* restaurant_with_sofa.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = restaurant_with_sofa.svg; path = ../../../../../Downloads/restaurant_with_sofa.svg; sourceTree = "<group>"; };
 		15F9F9582584257900E509C5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CEDCB0B49CBE6B000A67BD49 /* Pods-VisualBooking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.debug.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.debug.xcconfig"; sourceTree = "<group>"; };
-		E3C546878ADC7E42A4429D2E /* Pods-VisualBooking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.release.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.release.xcconfig"; sourceTree = "<group>"; };
+		3A4D5588015B9DE924EAE365 /* Pods-VisualBooking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.release.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.release.xcconfig"; sourceTree = "<group>"; };
+		9B18290459FA6880ED35C46A /* Pods-VisualBooking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisualBooking.debug.xcconfig"; path = "Target Support Files/Pods-VisualBooking/Pods-VisualBooking.debug.xcconfig"; sourceTree = "<group>"; };
 		FABD486185E26EB69D1EBEB9 /* Pods_VisualBooking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisualBooking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,8 +73,8 @@
 			children = (
 				156C8F4D2582B0C1001E4B9A /* VisualBooking */,
 				156C8F4C2582B0C1001E4B9A /* Products */,
-				E6D457DB8AD3AD6CCB776E15 /* Pods */,
 				377CD7B3725007803951C2B7 /* Frameworks */,
+				20ED9EF92EC6E577CC2346D8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,21 +169,22 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		20ED9EF92EC6E577CC2346D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9B18290459FA6880ED35C46A /* Pods-VisualBooking.debug.xcconfig */,
+				3A4D5588015B9DE924EAE365 /* Pods-VisualBooking.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		377CD7B3725007803951C2B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				FABD486185E26EB69D1EBEB9 /* Pods_VisualBooking.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E6D457DB8AD3AD6CCB776E15 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CEDCB0B49CBE6B000A67BD49 /* Pods-VisualBooking.debug.xcconfig */,
-				E3C546878ADC7E42A4429D2E /* Pods-VisualBooking.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,7 +441,7 @@
 		};
 		156C8F602582B0C1001E4B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEDCB0B49CBE6B000A67BD49 /* Pods-VisualBooking.debug.xcconfig */;
+			baseConfigurationReference = 9B18290459FA6880ED35C46A /* Pods-VisualBooking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -461,7 +462,7 @@
 		};
 		156C8F612582B0C1001E4B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3C546878ADC7E42A4429D2E /* Pods-VisualBooking.release.xcconfig */;
+			baseConfigurationReference = 3A4D5588015B9DE924EAE365 /* Pods-VisualBooking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

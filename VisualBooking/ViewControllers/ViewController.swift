@@ -12,7 +12,10 @@ import MultiSlider
 class ViewController: UIViewController {
 
     var reservations: [Reservation] = []
+    var reservationsInTimeRange: [Reservation] = []
+    var tables: [Table] = []
 
+    var user: User!
     @UsesAutoLayout
     var restaurantView: MacawView = {
         let node = try! SVGParser.parse(path: Constants.svgFileName)
@@ -25,19 +28,21 @@ class ViewController: UIViewController {
         let picker = UIDatePicker()
         picker.timeZone = NSTimeZone.local
         picker.backgroundColor = UIColor.white
-        picker.preferredDatePickerStyle = .inline
+        picker.preferredDatePickerStyle = .wheels
+
         picker.datePickerMode = .date
-        picker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
+        picker.addTarget(self, action: #selector(pickedDay(_:)), for: .valueChanged)
         return picker
     }()
+
     @UsesAutoLayout
     var inputDateTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Pick a Day"
         textField.textAlignment = .center
         textField.layer.zPosition = 2
         return textField
     }()
+
     @UsesAutoLayout
     var timeSlider: MultiSlider = {
         let slider = MultiSlider()
@@ -55,71 +60,120 @@ class ViewController: UIViewController {
         slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
         return slider
     }()
+
+    @UsesAutoLayout
+    var submitButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("SUBMIT", for: .normal)
+
+        return button
+    }()
     override func loadView() {
         view = UIView()
         view.backgroundColor = .white
+        inputDateTextFieldPreparation()
 
-        [restaurantView, inputDateTextField, timeSlider].forEach { view.addSubview($0) }
+        [restaurantView, inputDateTextField, timeSlider, submitButton].forEach { view.addSubview($0) }
         setupRestaurantViewLayout()
         setupDatePickerLayout()
         setupTimeSliderLayout()
-
+        setupButtonLayout()
 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        Constants.tableId.forEach { id in
-            registerForSelection(nodeTag: id)
-        }
-        datePicker.frame = CGRect(x: view.frame.minX, y: view.frame.maxY - 250, width: view.frame.width, height: 250)
-        inputDateTextField.inputView = datePicker
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOutsideDate(_:)))
-        view.addGestureRecognizer(tapGesture)
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let st = formatter.date(from: "2020/12/12 18:30")!
-//        let end = formatter.date(from: "2020/12/12 19:30")!
-//        let DanyloId = "vP2s62SjcTq3FOVaKhDE"
-//
-//        let r1 = Reservation(userId: DanyloId, tableId: "1", startReservation: st, endReservation: end)
-//        FIRFirestoreService.shared.create(for: r1, in: .reservations)
-//        print("LOADED")
+
+        Constants.tableId.forEach { tables.append(Table(id: $0, node: restaurantView.node.nodeBy(tag: $0)!)) }
+        user = User(name: "Danylo", phone: "0638800949")
+        FIRFirestoreService.shared.create(for: user, in: .users)
+
 
     }
-
-    private func registerForSelection(nodeTag: String) {
-        self.restaurantView.node.nodeBy(tag: nodeTag)?.onTouchPressed({ (touch) in
-            let nodeShape = self.restaurantView.node.nodeBy(tag: nodeTag) as! Shape
-            nodeShape.fill = (nodeShape.fill == Constants.tableColor) ? Color.whiteSmoke : Constants.tableColor
-            print(nodeTag)
+    // MARK: SVG updating function
+    func renderRestaurantTablesStatus(on view: MacawView, from reservationsList: [Reservation], for tableIds: [String]) {
+        tables.forEach { ($0.node as! Shape).fill = Constants.tableColor }
+        let reservedTables = reservationsList.map { $0.tableId }
+        tables.forEach {
+            if reservedTables.contains($0.id) {
+                ($0.node as! Shape).fill = Constants.tableReservedColor
+            }
+        }
+    }
+    // MARK: SVG FIlling node functions
+    private func registerForSelectionToggle(with id: String, baseColor: Color, toggleColor: Color) {
+        tables.first { $0.id == id }!.node.onTouchPressed({ (touch) in
+            let nodeShape = self.tables.first { $0.id == id }!.node as! Shape
+            let color = (nodeShape.fill == baseColor) ? toggleColor : baseColor
+            nodeShape.fill = color
+            print("tapping")
         })
     }
+
+    // MARK: InputTextField functions
+    private func inputDateTextFieldPreparation() {
+        pickedDay(datePicker)
+        inputDateTextField.inputView = datePicker
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tappedOutsideDate(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+
     @objc func tappedOutsideDate(_ sender: UIView) {
         inputDateTextField.endEditing(true)
     }
 
-    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+
+    @objc func pickedDay(_ sender: UIDatePicker) {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, dd MMM yyyy"
         inputDateTextField.text = dateFormatter.string(from: datePicker.date)
         inputDateTextField.endEditing(true)
-    }
 
-    // MARK:- Slider functions
-    @objc func sliderChanged(_ slider: MultiSlider) {
-        let dateOfDay = Calendar.current.startOfDay(for: datePicker.date)
-        let values = slider.value.map { (dateOfDay + TimeInterval(Int($0) * 60)).timeIntervalSince1970 }
+        let values = getStartEndTimeValues(dayPicker: datePicker, leftRange: Constants.openTime, rightRange: Constants.closeTime)
         let start = values[0], end = values[1]
 
         FIRFirestoreService.shared.read(from: .reservations, returning: Reservation.self, orderBy: "startReservation", startAt: [start], endAt: [end]) { (reservations) in
             self.reservations = reservations
+            self.reloadReservations(slider: self.timeSlider, dayPicker: self.datePicker)
+            self.renderRestaurantTablesStatus(on: self.restaurantView, from: self.reservationsInTimeRange, for: Constants.tableId)
+            self.setUpHandlers()
         }
-        print(self.reservations)
+
+    }
+
+    // MARK: Hellper functions
+
+    func getStartEndTimeValues<T:BinaryFloatingPoint>(dayPicker: UIDatePicker, leftRange: T, rightRange: T) -> [TimeInterval] {
+        let dateOfDay = Calendar.current.startOfDay(for: dayPicker.date)
+        let values = [leftRange, rightRange].map { (dateOfDay + TimeInterval(Int($0) * 60)).timeIntervalSince1970 }
+        return values
+    }
+    func reloadReservations(slider: MultiSlider, dayPicker: UIDatePicker) {
+        let values = getStartEndTimeValues(dayPicker: dayPicker, leftRange: slider.value[0], rightRange: slider.value[1])
+        let start = values[0], end = values[1]
+        reservationsInTimeRange = reservations.filter { (start < $0.startReservation) && (end > $0.endReservation) }
+    }
+
+    func setUpHandlers() {
+        print(reservationsInTimeRange)
+        tables.forEach { table in
+            table.node.remveAllTouchPressedHanders()
+            registerForSelectionToggle(with: table.id, baseColor: Constants.tableColor, toggleColor: Color.white)
+        }
+        reservationsInTimeRange.forEach { reservation in
+            tables.first { $0.id == reservation.tableId }?.node.remveAllTouchPressedHanders()
+        }
+    }
+
+    // MARK: Slider functions
+    @objc func sliderChanged(_ slider: MultiSlider) {
+        reloadReservations(slider: slider, dayPicker: datePicker)
+        renderRestaurantTablesStatus(on: restaurantView, from: reservationsInTimeRange, for: Constants.tableId)
+        print("sliderChanged")
     }
 
     @objc func sliderDragEnded(_ sender: MultiSlider) {
-//        print(sender.value)
+        setUpHandlers()
+        print("slider Drag ended")
     }
 
     // MARK: Layout
@@ -151,6 +205,16 @@ class ViewController: UIViewController {
             timeSlider.topAnchor.constraint(equalTo: inputDateTextField.bottomAnchor, constant: 10),
             timeSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeSlider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+
+    private func setupButtonLayout() {
+        let constraints = [
+            submitButton.topAnchor.constraint(equalTo: restaurantView.bottomAnchor, constant: 10),
+            submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            submitButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            submitButton.heightAnchor.constraint(equalToConstant: 50),
         ]
         NSLayoutConstraint.activate(constraints)
     }

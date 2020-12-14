@@ -9,6 +9,5 @@ import Foundation
 
 enum FIRCollectionReference: String{
     case users
-    case tables
     case reservations
 }

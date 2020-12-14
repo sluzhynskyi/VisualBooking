@@ -22,7 +22,8 @@ struct Constants {
 
     // Color of SVG
     static let tableColor: Color = Color(0x56595f)
-
+    static let tableReservedColor: Color = Color.red
+    static let defaultPeopleByTable: Int = 2
     // SVG filename
     static let svgFileName: String = "restaurant_croped"
     static let tableId = [
@@ -33,4 +34,6 @@ struct Constants {
         "4",
         "5"
     ]
+    // Placeholder for textfield
+    static let placeholderDateField: String = "Pick a Day"
 }
