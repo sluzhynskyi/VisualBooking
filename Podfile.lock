@@ -371,7 +371,7 @@ CHECKOUT OPTIONS:
     :commit: bf4b86c3597ea642f15557e201417e7bc0871c02
     :git: https://github.com/sluzhynskyi/Macaw.git
   MultiSlider:
-    :commit: 66544ffa22b97d20d6921b6dc9c5c8f8b604cc9b
+    :commit: 0a3500ad429a2bcbad7e6ae2990e1329e410e89d
     :git: https://github.com/sluzhynskyi/MultiSlider.git
 
 SPEC CHECKSUMS:

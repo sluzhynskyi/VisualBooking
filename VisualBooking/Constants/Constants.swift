@@ -17,9 +17,12 @@ struct Constants {
 
     static let thumbsInitialPosition: [CGFloat] = [openTime, closeTime]
     // Colors of slider
-    static let inSlideColor: UIColor = UIColor(hex: "#f3b96bff")!
+    static let inSlideColor: UIColor = UIColor(hex: "#fdaf47ff")! // #f3b96bff
     static let outSlideColor: UIColor = UIColor(hex: "#c6b8a7ff")!
-
+    // Color of textView
+    static let backgroundColor: UIColor = UIColor(hex: "#fdaf47ff")!
+    static let borderColor: CGColor = UIColor(hex: "#f3b96bff")!.cgColor
+    static let shadowColor: CGColor = UIColor(hex: "#463219ff")!.cgColor
     // Color of SVG
     static let tableColor: Color = Color(0x56595f)
     static let tableReservedColor: Color = Color.red

@@ -29,7 +29,6 @@ class ViewController: UIViewController {
         picker.timeZone = NSTimeZone.local
         picker.backgroundColor = UIColor.white
         picker.preferredDatePickerStyle = .wheels
-
         picker.datePickerMode = .date
         picker.addTarget(self, action: #selector(pickedDay(_:)), for: .valueChanged)
         return picker
@@ -39,7 +38,20 @@ class ViewController: UIViewController {
     var inputDateTextField: UITextField = {
         let textField = UITextField()
         textField.textAlignment = .center
+        textField.textColor = UIColor.white
+
+        textField.backgroundColor = Constants.backgroundColor
+
+        textField.layer.borderColor = Constants.borderColor
+        textField.borderStyle = .none
+        textField.layer.borderWidth = 0.25
+
         textField.layer.zPosition = 2
+
+//        textField.layer.cornerRadius = 4
+
+
+
         return textField
     }()
 
@@ -55,6 +67,7 @@ class ViewController: UIViewController {
         slider.valueLabelPosition = .top
         slider.tintColor = Constants.inSlideColor
         slider.outerTrackColor = Constants.outSlideColor
+        slider.labelColor = .black
         slider.layer.zPosition = 1
         slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged) // continuous changes
         slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
@@ -64,7 +77,14 @@ class ViewController: UIViewController {
     @UsesAutoLayout
     var submitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("SUBMIT", for: .normal)
+        button.setTitle("Submit reservation", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18)
+        button.setTitleColor(.white, for: .normal)
+
+        button.backgroundColor = Constants.backgroundColor
+
+        button.layer.borderColor = Constants.borderColor
+        button.layer.borderWidth = 0.25
 
         return button
     }()
@@ -72,7 +92,6 @@ class ViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
         inputDateTextFieldPreparation()
-
         [restaurantView, inputDateTextField, timeSlider, submitButton].forEach { view.addSubview($0) }
         setupRestaurantViewLayout()
         setupDatePickerLayout()
@@ -82,7 +101,7 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        [inputDateTextField, submitButton].forEach { $0.addShadow(); $0.addCorners() }
         Constants.tableId.forEach { tables.append(Table(id: $0, node: restaurantView.node.nodeBy(tag: $0)!)) }
         user = User(name: "Danylo", phone: "0638800949")
         FIRFirestoreService.shared.create(for: user, in: .users)
@@ -181,10 +200,10 @@ class ViewController: UIViewController {
     // Restourant view constraints
     private func setupRestaurantViewLayout() {
         let constraints = [
-            restaurantView.topAnchor.constraint(equalTo: timeSlider.bottomAnchor, constant: 20),
+            restaurantView.topAnchor.constraint(equalTo: timeSlider.bottomAnchor, constant: -20),
             restaurantView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             restaurantView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            restaurantView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+//            restaurantView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
 //            restaurantView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10)
         ]
         NSLayoutConstraint.activate(constraints)
@@ -202,7 +221,7 @@ class ViewController: UIViewController {
 
     private func setupTimeSliderLayout() {
         let constraints = [
-            timeSlider.topAnchor.constraint(equalTo: inputDateTextField.bottomAnchor, constant: 10),
+            timeSlider.topAnchor.constraint(equalTo: inputDateTextField.bottomAnchor, constant: 25),
             timeSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeSlider.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
         ]
@@ -215,6 +234,7 @@ class ViewController: UIViewController {
             submitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             submitButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             submitButton.heightAnchor.constraint(equalToConstant: 50),
+            submitButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20),
         ]
         NSLayoutConstraint.activate(constraints)
     }
