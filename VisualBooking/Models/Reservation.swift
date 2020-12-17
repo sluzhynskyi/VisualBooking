@@ -12,11 +12,17 @@ struct Reservation: Codable, FirebaseObject {
     var endReservation: TimeInterval
     var userId: String
     var tableId: String
-    init(userId: String, tableId: String, startReservation: Date, endReservation: Date) {
+//    init(userId: String, tableId: String, startReservation: Date, endReservation: Date) {
+//        self.userId = userId
+//        self.tableId = tableId
+//        self.startReservation = startReservation.timeIntervalSince1970
+//        self.endReservation = endReservation.timeIntervalSince1970
+//    }
+    init(userId: String, tableId: String, startReservation: TimeInterval, endReservation: TimeInterval) {
         self.userId = userId
         self.tableId = tableId
-        self.startReservation = startReservation.timeIntervalSince1970
-        self.endReservation = endReservation.timeIntervalSince1970
+        self.startReservation = startReservation
+        self.endReservation = endReservation
     }
 }
 

@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         slider.labelColor = .black
         slider.layer.zPosition = 1
         slider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged) // continuous changes
-        slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: . touchUpInside) // sent when drag ends
+        slider.addTarget(self, action: #selector(sliderDragEnded(_:)), for: .touchUpInside) // sent when drag ends
         return slider
     }()
 
@@ -86,6 +86,7 @@ class ViewController: UIViewController {
         button.layer.borderColor = Constants.borderColor
         button.layer.borderWidth = 0.25
 
+        button.addTarget(self, action: #selector(submitButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     override func loadView() {
@@ -104,22 +105,26 @@ class ViewController: UIViewController {
         [inputDateTextField, submitButton].forEach { $0.addShadow(); $0.addCorners() }
         Constants.tableId.forEach { tables.append(Table(id: $0, node: restaurantView.node.nodeBy(tag: $0)!)) }
         user = User(name: "Danylo", phone: "0638800949")
-        FIRFirestoreService.shared.create(for: user, in: .users)
+        user.id = "sYMLTqK9oldlz45uX0Go"
+//        FIRFirestoreService.shared.create(for: user, in: .users)
 
 
     }
     // MARK: SVG updating function
     func renderRestaurantTablesStatus(on view: MacawView, from reservationsList: [Reservation]) {
-        tables.forEach { table in
-            if (table.node as! Shape).fill == Constants.tableReservedColor {
-                (table.node as! Shape).fill = Constants.tableColor
-            }
-        }
         let reservedTables = reservationsList.map { $0.tableId }
-        tables.forEach {
-            if reservedTables.contains($0.id) {
-                ($0.node as! Shape).fill = Constants.tableReservedColor
+
+        for table in tables {
+            if (table.node as! Shape).fill == Constants.tableReservedColor {
+                if !reservedTables.contains(table.id) {
+                    (table.node as! Shape).fill = Constants.tableColor
+                }
+            } else {
+                if reservedTables.contains(table.id) {
+                    (table.node as! Shape).fill = Constants.tableReservedColor
+                }
             }
+
         }
     }
     // MARK: SVG FIlling node functions
@@ -173,14 +178,19 @@ class ViewController: UIViewController {
     func reloadReservations(slider: MultiSlider, dayPicker: UIDatePicker) {
         let values = getStartEndTimeValues(dayPicker: dayPicker, leftRange: slider.value[0], rightRange: slider.value[1])
         let start = values[0], end = values[1]
-        reservationsInTimeRange = reservations.filter { (start < $0.startReservation) && (end > $0.endReservation) }
+        print(start, end)
+        reservationsInTimeRange = reservations.filter { reservation in
+            let dateRangeSlider = start ... end
+            let dateRangeReservation = reservation.startReservation ... reservation.endReservation
+            return dateRangeSlider.overlaps(dateRangeReservation)
+        }
     }
 
     func setUpHandlers() {
         print(reservationsInTimeRange)
         tables.forEach { table in
             table.node.remveAllTouchPressedHanders()
-            registerForSelectionToggle(with: table.id, baseColor: Constants.tableColor, toggleColor: Color.white)
+            registerForSelectionToggle(with: table.id, baseColor: Constants.tableColor, toggleColor: Constants.tableSelectedColor)
         }
         reservationsInTimeRange.forEach { reservation in
             tables.first { $0.id == reservation.tableId }?.node.remveAllTouchPressedHanders()
@@ -197,6 +207,20 @@ class ViewController: UIViewController {
     @objc func sliderDragEnded(_ sender: MultiSlider) {
         setUpHandlers()
         print("slider Drag ended")
+    }
+
+    // MARK: Submition button
+
+    @objc func submitButtonTapped(_ sender: UIButton) {
+        tables.forEach { table in
+            if (table.node as! Shape).fill == Constants.tableSelectedColor {
+                let values = getStartEndTimeValues(dayPicker: datePicker, leftRange: timeSlider.value[0], rightRange: timeSlider.value[1])
+                let start = values[0], end = values[1]
+                let reservation = Reservation(userId: user.id!, tableId: table.id, startReservation: start, endReservation: end)
+                FIRFirestoreService.shared.create(for: reservation, in: .reservations)
+            }
+        }
+
     }
 
     // MARK: Layout

@@ -25,7 +25,8 @@ struct Constants {
     static let shadowColor: CGColor = UIColor(hex: "#463219ff")!.cgColor
     // Color of SVG
     static let tableColor: Color = Color(0x56595f)
-    static let tableReservedColor: Color = Color.red
+    static let tableReservedColor: Color = .red
+    static let tableSelectedColor: Color = .white
     static let defaultPeopleByTable: Int = 2
     // SVG filename
     static let svgFileName: String = "restaurant_croped"
