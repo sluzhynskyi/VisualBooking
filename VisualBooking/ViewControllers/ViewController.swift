@@ -109,8 +109,12 @@ class ViewController: UIViewController {
 
     }
     // MARK: SVG updating function
-    func renderRestaurantTablesStatus(on view: MacawView, from reservationsList: [Reservation], for tableIds: [String]) {
-        tables.forEach { ($0.node as! Shape).fill = Constants.tableColor }
+    func renderRestaurantTablesStatus(on view: MacawView, from reservationsList: [Reservation]) {
+        tables.forEach { table in
+            if (table.node as! Shape).fill == Constants.tableReservedColor {
+                (table.node as! Shape).fill = Constants.tableColor
+            }
+        }
         let reservedTables = reservationsList.map { $0.tableId }
         tables.forEach {
             if reservedTables.contains($0.id) {
@@ -153,7 +157,7 @@ class ViewController: UIViewController {
         FIRFirestoreService.shared.read(from: .reservations, returning: Reservation.self, orderBy: "startReservation", startAt: [start], endAt: [end]) { (reservations) in
             self.reservations = reservations
             self.reloadReservations(slider: self.timeSlider, dayPicker: self.datePicker)
-            self.renderRestaurantTablesStatus(on: self.restaurantView, from: self.reservationsInTimeRange, for: Constants.tableId)
+            self.renderRestaurantTablesStatus(on: self.restaurantView, from: self.reservationsInTimeRange)
             self.setUpHandlers()
         }
 
@@ -186,7 +190,7 @@ class ViewController: UIViewController {
     // MARK: Slider functions
     @objc func sliderChanged(_ slider: MultiSlider) {
         reloadReservations(slider: slider, dayPicker: datePicker)
-        renderRestaurantTablesStatus(on: restaurantView, from: reservationsInTimeRange, for: Constants.tableId)
+        renderRestaurantTablesStatus(on: restaurantView, from: reservationsInTimeRange)
         print("sliderChanged")
     }
 
