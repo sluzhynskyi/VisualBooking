@@ -9,13 +9,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let defaults = UserDefaults.standard
+    var userIsLoggedIn: Bool!
     func scene(_ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let rootVC = LoginController()
+        userIsLoggedIn = defaults.bool(forKey: "UserIsLoggedIn")
+        let rootVC = userIsLoggedIn ? MainController() : LoginController()
 //        navigationController?.viewControllers = [rootVC]
         window.rootViewController = UINavigationController(rootViewController: rootVC)
         self.window = window

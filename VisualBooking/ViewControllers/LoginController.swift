@@ -103,6 +103,8 @@ class LoginController: UIViewController, FPNTextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     }
 
 
@@ -122,6 +124,7 @@ class LoginController: UIViewController, FPNTextFieldDelegate {
 
         pincodeTest.phoneNumber = self.phoneNumber
         print("code recieved from fb \(self.code)")
+//        self.present(UINavigationController(rootViewController: pincode), animated: true, completion: nil)
         navigationController?.pushViewController(pincodeTest, animated: true)
 
 

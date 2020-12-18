@@ -10,6 +10,7 @@ import UIKit
 import PinCodeTextField
 import Firebase
 class PincodeTestController: UIViewController {
+    let defaults = UserDefaults.standard
     var phoneNumber: String!
     var code: String!
     @UsesAutoLayout
@@ -41,10 +42,15 @@ class PincodeTestController: UIViewController {
         return button
     }()
 
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        pincodeInputTextField.keyboardAppearance = .light
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = "Enter code"
         let attributedText = NSMutableAttributedString(string: "An SMS code was sent to", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor: UIColor.gray])
 
         attributedText.append(NSAttributedString(string: "\n\n\(phoneNumber!)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.black]))
@@ -67,8 +73,12 @@ class PincodeTestController: UIViewController {
             if let error = err {
                 print(error)
             } else {
-                let mainVC = MainController()
-                self.navigationController?.pushViewController(mainVC, animated: true)
+                self.defaults.set(true, forKey: "UserIsLoggedIn")
+                let mainVC = UINavigationController(rootViewController: MainController())
+//                let mainVC = MainController()
+                mainVC.modalPresentationStyle = .fullScreen
+                self.present(mainVC, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(mainVC, animated: true)
             }
         }
 
