@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainController.swift
 //  VisualBooking
 //
 //  Created by Danylo Sluzhynskyi on 10.12.2020.
@@ -9,7 +9,7 @@ import UIKit
 import Macaw
 import FirebaseFirestore
 import MultiSlider
-class ViewController: UIViewController {
+class MainController: UIViewController {
 
     var reservations: [Reservation] = []
     var reservationsInTimeRange: [Reservation] = []
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         let textField = UITextField()
         textField.textAlignment = .center
         textField.textColor = UIColor.white
-
+        textField.font = .boldSystemFont(ofSize: 18)
         textField.backgroundColor = Constants.backgroundColor
 
         textField.layer.borderColor = Constants.borderColor
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
     @UsesAutoLayout
     var submitButton: StyledButton = {
         let button = StyledButton(type: .system)
-        button.setTitle("Submit reservation", for: .normal)
+        button.setTitle("SUBMIT", for: .normal)
         button.addTarget(self, action: #selector(submitButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
@@ -96,6 +96,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         [inputDateTextField, submitButton].forEach { $0.addShadow(); $0.addCorners() }
         Constants.tableId.forEach { tables.append(Table(id: $0, node: restaurantView.node.nodeBy(tag: $0)!)) }
+
+        submitButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
+
         user = User(name: "Danylo", phone: "0638800949")
         user.id = "sYMLTqK9oldlz45uX0Go"
 //        FIRFirestoreService.shared.create(for: user, in: .users)

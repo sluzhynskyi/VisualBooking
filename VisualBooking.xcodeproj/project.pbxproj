@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		156C8F4F2582B0C1001E4B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C8F4E2582B0C1001E4B9A /* AppDelegate.swift */; };
 		156C8F512582B0C1001E4B9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C8F502582B0C1001E4B9A /* SceneDelegate.swift */; };
-		156C8F532582B0C1001E4B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C8F522582B0C1001E4B9A /* ViewController.swift */; };
+		156C8F532582B0C1001E4B9A /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156C8F522582B0C1001E4B9A /* MainController.swift */; };
 		156C8F582582B0C1001E4B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 156C8F572582B0C1001E4B9A /* Assets.xcassets */; };
 		156D8A162584E06800CD3616 /* restaurant_croped.svg in Resources */ = {isa = PBXBuildFile; fileRef = 156D8A152584E06800CD3616 /* restaurant_croped.svg */; };
 		156D8A312584FA3100CD3616 /* UIColorExtentsions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A302584FA3100CD3616 /* UIColorExtentsions.swift */; };
 		156D8A372585470D00CD3616 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D8A362585470D00CD3616 /* Constants.swift */; };
 		156D8AFF258581E100CD3616 /* Pods_VisualBooking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABD486185E26EB69D1EBEB9 /* Pods_VisualBooking.framework */; };
 		1580A7A62586118700BF2D89 /* ViewExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580A7A52586118700BF2D89 /* ViewExtenstions.swift */; };
+		159B1102258BEA5600E0746A /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B1101258BEA5600E0746A /* LoginController.swift */; };
+		159B1106258BEB3F00E0746A /* StyledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B1105258BEB3F00E0746A /* StyledButton.swift */; };
+		159B1175258CD35900E0746A /* PincodeTestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159B1174258CD35900E0746A /* PincodeTestController.swift */; };
 		15F9F8202582C84300E509C5 /* restaurant.svg in Resources */ = {isa = PBXBuildFile; fileRef = 15F9F81F2582C84300E509C5 /* restaurant.svg */; };
 		15F9F83D258393BA00E509C5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F83C258393BA00E509C5 /* User.swift */; };
 		15F9F841258393C600E509C5 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F9F840258393C600E509C5 /* Table.swift */; };
@@ -33,13 +36,16 @@
 		156C8F4B2582B0C1001E4B9A /* VisualBooking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisualBooking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		156C8F4E2582B0C1001E4B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		156C8F502582B0C1001E4B9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		156C8F522582B0C1001E4B9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		156C8F522582B0C1001E4B9A /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		156C8F572582B0C1001E4B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		156C8F5C2582B0C1001E4B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		156D8A152584E06800CD3616 /* restaurant_croped.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant_croped.svg; sourceTree = "<group>"; };
 		156D8A302584FA3100CD3616 /* UIColorExtentsions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtentsions.swift; sourceTree = "<group>"; };
 		156D8A362585470D00CD3616 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1580A7A52586118700BF2D89 /* ViewExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtenstions.swift; sourceTree = "<group>"; };
+		159B1101258BEA5600E0746A /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		159B1105258BEB3F00E0746A /* StyledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledButton.swift; sourceTree = "<group>"; };
+		159B1174258CD35900E0746A /* PincodeTestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PincodeTestController.swift; sourceTree = "<group>"; };
 		15F9F81F2582C84300E509C5 /* restaurant.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant.svg; sourceTree = "<group>"; };
 		15F9F83C258393BA00E509C5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		15F9F840258393C600E509C5 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 		156C8F4D2582B0C1001E4B9A /* VisualBooking */ = {
 			isa = PBXGroup;
 			children = (
+				159B1104258BEB1800E0746A /* UIElements */,
 				156D8A35258546F200CD3616 /* Constants */,
 				156D8A34258546DC00CD3616 /* ViewControllers */,
 				156D8A33258546BA00CD3616 /* Delegates */,
@@ -116,7 +123,9 @@
 		156D8A34258546DC00CD3616 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				156C8F522582B0C1001E4B9A /* ViewController.swift */,
+				156C8F522582B0C1001E4B9A /* MainController.swift */,
+				159B1101258BEA5600E0746A /* LoginController.swift */,
+				159B1174258CD35900E0746A /* PincodeTestController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -127,6 +136,14 @@
 				156D8A362585470D00CD3616 /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		159B1104258BEB1800E0746A /* UIElements */ = {
+			isa = PBXGroup;
+			children = (
+				159B1105258BEB3F00E0746A /* StyledButton.swift */,
+			);
+			path = UIElements;
 			sourceTree = "<group>";
 		};
 		15F9F8222582C8E200E509C5 /* Resourses */ = {
@@ -175,7 +192,6 @@
 				9B18290459FA6880ED35C46A /* Pods-VisualBooking.debug.xcconfig */,
 				3A4D5588015B9DE924EAE365 /* Pods-VisualBooking.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,12 +325,15 @@
 				15F9F841258393C600E509C5 /* Table.swift in Sources */,
 				15F9F844258393DF00E509C5 /* Reservation.swift in Sources */,
 				15F9F89A2583C79900E509C5 /* FIRCollectionReference.swift in Sources */,
-				156C8F532582B0C1001E4B9A /* ViewController.swift in Sources */,
+				156C8F532582B0C1001E4B9A /* MainController.swift in Sources */,
 				15F9F85825839F7500E509C5 /* FIRFirestoreService.swift in Sources */,
+				159B1102258BEA5600E0746A /* LoginController.swift in Sources */,
 				156D8A312584FA3100CD3616 /* UIColorExtentsions.swift in Sources */,
 				15F9F8CE2583D1A100E509C5 /* SnapshotExtensions.swift in Sources */,
 				156C8F4F2582B0C1001E4B9A /* AppDelegate.swift in Sources */,
 				156C8F512582B0C1001E4B9A /* SceneDelegate.swift in Sources */,
+				159B1175258CD35900E0746A /* PincodeTestController.swift in Sources */,
+				159B1106258BEB3F00E0746A /* StyledButton.swift in Sources */,
 				156D8A372585470D00CD3616 /* Constants.swift in Sources */,
 				1580A7A62586118700BF2D89 /* ViewExtenstions.swift in Sources */,
 			);

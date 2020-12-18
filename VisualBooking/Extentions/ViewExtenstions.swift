@@ -25,7 +25,7 @@ extension UIView {
     func addCorners() {
         clipsToBounds = true
         layer.masksToBounds = false
-        layer.cornerRadius = 20
+        layer.cornerRadius = 26
     }
     func addShadow() {
         layer.shadowColor = Constants.shadowColor

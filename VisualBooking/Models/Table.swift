@@ -11,7 +11,7 @@ struct Table {
     var id: String!
     var peopleByTable: Int = Constants.defaultPeopleByTable
     var tableType: String? = TableType.regular.rawValue
-    var node: Node
+    let node: Node
     init(id: String, node: Node) {
         self.id = id
         self.node = node
