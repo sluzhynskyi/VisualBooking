@@ -75,17 +75,9 @@ class ViewController: UIViewController {
     }()
 
     @UsesAutoLayout
-    var submitButton: UIButton = {
-        let button = UIButton(type: .system)
+    var submitButton: StyledButton = {
+        let button = StyledButton(type: .system)
         button.setTitle("Submit reservation", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 18)
-        button.setTitleColor(.white, for: .normal)
-
-        button.backgroundColor = Constants.backgroundColor
-
-        button.layer.borderColor = Constants.borderColor
-        button.layer.borderWidth = 0.25
-
         button.addTarget(self, action: #selector(submitButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
