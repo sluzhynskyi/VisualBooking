@@ -17,7 +17,7 @@ class MainController: UIViewController {
     var reservationsInTimeRange: [Reservation] = []
     var tables: [Table] = []
 
-    var user: User!
+    var user: Firebase.User!
     @UsesAutoLayout
     var restaurantView: MacawView = {
         let node = try! SVGParser.parse(path: Constants.svgFileName)
@@ -103,8 +103,7 @@ class MainController: UIViewController {
 
         submitButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
 
-        user = User(name: "Danylo", phone: "0638800949")
-        user.id = "sYMLTqK9oldlz45uX0Go"
+        user = Auth.auth().currentUser!
 //        FIRFirestoreService.shared.create(for: user, in: .users)
 
 
@@ -215,7 +214,7 @@ class MainController: UIViewController {
             if (table.node as! Shape).fill == Constants.tableSelectedColor {
                 let values = getStartEndTimeValues(dayPicker: datePicker, leftRange: timeSlider.value[0], rightRange: timeSlider.value[1])
                 let start = values[0], end = values[1]
-                let reservation = Reservation(userId: user.id!, tableId: table.id, startReservation: start, endReservation: end)
+                let reservation = Reservation(userId: user.uid, tableId: table.id, startReservation: start, endReservation: end)
                 FIRFirestoreService.shared.create(for: reservation, in: .reservations)
             }
         }
@@ -278,7 +277,7 @@ extension MainController {
             let loginVC = UINavigationController(rootViewController: LoginController())
             loginVC.modalPresentationStyle = .fullScreen
             self.present(loginVC, animated: true, completion: nil)
-            
+
         } catch let err {
             print(err.localizedDescription)
         }
