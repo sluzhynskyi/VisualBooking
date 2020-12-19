@@ -228,8 +228,6 @@ class MainController: UIViewController {
             restaurantView.topAnchor.constraint(equalTo: timeSlider.bottomAnchor, constant: -20),
             restaurantView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             restaurantView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-//            restaurantView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-//            restaurantView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -10)
         ]
         NSLayoutConstraint.activate(constraints)
     }
