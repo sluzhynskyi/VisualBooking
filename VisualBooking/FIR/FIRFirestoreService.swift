@@ -35,7 +35,22 @@ class FIRFirestoreService {
             print(error)
         }
     }
+    func read<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, child field: String, equal to: String, completion: @escaping ([T]) -> Void) {
+        reference(to: collectionReference).whereField(field, in: [to]).addSnapshotListener { (snapshot, _) in
+            guard let snapshot = snapshot else { return }
+            do {
+                var objects = [T]()
+                for document in snapshot.documents {
+                    let object = try document.decode(as: objectType.self, includingId: true)
+                    objects.append(object)
+                }
+                completion(objects)
+            } catch {
+                print(error)
+            }
+        }
 
+    }
     func read<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, orderBy field: String, startAt: [Any], endAt: [Any], completion: @escaping ([T]) -> Void) {
 //        reference(to: collectionReference).addSnapshotListener { (snapshot, _) in
 //            guard let snapshot = snapshot else { return }

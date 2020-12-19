@@ -74,10 +74,9 @@ class PincodeTestController: UIViewController {
                 print(error)
             } else {
                 self.defaults.set(true, forKey: "UserIsLoggedIn")
-                let mainVC = UINavigationController(rootViewController: MainController())
-//                let mainVC = MainController()
-                mainVC.modalPresentationStyle = .fullScreen
-                self.present(mainVC, animated: true, completion: nil)
+                let mainTabBar = MainTabBarController()
+                mainTabBar.modalPresentationStyle = .fullScreen
+                self.present(mainTabBar, animated: true, completion: nil)
 //                self.navigationController?.pushViewController(mainVC, animated: true)
             }
         }
