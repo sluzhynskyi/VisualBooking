@@ -96,8 +96,7 @@ class MainController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Table reservation"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logOut(_:)))
+        navigationItem.title = "Home"
         [inputDateTextField, submitButton].forEach { $0.addShadow(); $0.addCorners() }
         Constants.tableId.forEach { tables.append(Table(id: $0, node: restaurantView.node.nodeBy(tag: $0)!)) }
 
@@ -269,18 +268,4 @@ class MainController: UIViewController {
 
 
 
-extension MainController {
-    @objc func logOut(_ sender: UIBarItem) {
-        do {
-            try Auth.auth().signOut()
-            dafaults.set(false, forKey: "UserIsLoggedIn")
-            let loginVC = UINavigationController(rootViewController: LoginController())
-            loginVC.modalPresentationStyle = .fullScreen
-            self.present(loginVC, animated: true, completion: nil)
 
-        } catch let err {
-            print(err.localizedDescription)
-        }
-
-    }
-}
