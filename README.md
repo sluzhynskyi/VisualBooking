@@ -1,22 +1,23 @@
-## Template project iOS
- Mobile template is written with Swift 5.0. This template project include bunch of 3rd frameworks and class extensions for you easy to create new project without waste time to add common  Utilities.
+## Visuap Booking app
+![merge_from_ofoct](https://user-images.githubusercontent.com/44615981/102927711-261fb380-44a0-11eb-9399-b688f389f7fe.png)
+
+This app help user make a reservation of the table with nice looking UI, in interactive way
+
 ## Architecture
- Choose what ever architechture you want 
-## Fastlane
- This project already  setup with fastlane, navigate to project folder, open fast file and modify setting for CI.
+Build in MVC Architecture
 
 ## Libraries
-- RxAlamofire
-- RxSwift
-- RxCocoa 
-  Bring power of ReactiveX to Swift
-
-- Kingfisher: Set and cache image simply  with URL
-- IQKeyboardManagerSwift: Automatic handle keyboard on ScrollView.
-- SnapKit: Autolayout easy than ever.
+- [Macaw](https://github.com/exyte/Macaw), but with some modification, so in Podfile used my [fork](https://github.com/sluzhynskyi/Macaw/tree/NodeImprove)
+- [MultiSlider](https://github.com/yonat/MultiSlider), my [branch](https://github.com/sluzhynskyi/MultiSlider/tree/DateSlider) also used in Podfile
+- Firebase/Analytics
+- Firebase/Firestore
+- Firebase/Auth
+- [FlagPhoneNumber](https://github.com/chronotruck/FlagPhoneNumber)
+- [PinCodeTextField](https://github.com/tkach/PinCodeTextField)
 
 ## How to run
 - Install cocoapods if you MAC didn't `brew install cocoapods`
-- Todo: Rename project by cd to project folder and run `sh ./setup.sh` enter your app name, bunderId then press ⏎
-- Open `*.xcworkspace`
+- Install pods, that required `pod install`
+- Open workspace `open VisualBooking.xcworkspace`
+- Change Google-Service.info file for Firebase
 - Cmd + R to run
